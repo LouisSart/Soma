@@ -1,0 +1,1 @@
+A program for counting the possible combinations that solve the Soma cube
