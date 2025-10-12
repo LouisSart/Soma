@@ -10,7 +10,7 @@ def piece_to_int(piece):
     ret = 0
     for cube in piece:
         x, y, z = cube
-        ind = 3 * (3 * x + y) + z
+        ind = 3 * (3 * z + y) + x
         assert(ind < 27)
         ret += 2 ** ind
     return ret
@@ -21,11 +21,11 @@ def gen_canonicals(piece):
     for xrot in range(4):
         for yrot in range(4):
             for zrot in range(4):
-                print(xrot, yrot, zrot)
+                assert(is_canonical(piece))
                 ind = piece_to_int(piece)
-            # if ind not in dup_tracker:
-            #     dup_tracker.add(ind)
-                ret.append(np.copy(piece))
+                if ind not in dup_tracker:
+                    ret.append(np.copy(piece))
+                    dup_tracker.add(ind)
                 rotate(piece, 2)
                 make_canonical(piece)
             rotate(piece, 1)
@@ -53,6 +53,14 @@ def gen_canonicals(piece):
 #             translate(p0, 0, 1)
 
 if __name__ == "__main__":
-    gen_canonicals(l)
-    # for p in gen_canonicals(l):
-    #     print(piece_to_int(p))
+    W_cano = gen_canonicals(W)
+    l_cano = gen_canonicals(l)
+    S_cano = gen_canonicals(S)
+    L_cano = gen_canonicals(L)
+    T_cano = gen_canonicals(T)
+    Na_cano = gen_canonicals(Na)
+    Nb_cano = gen_canonicals(Nb)
+    assert(len(Na_cano) == len(Nb_cano) == 12)
+    assert(len(T_cano) == 12)
+    assert(len(l_cano) == 12)
+    assert(len(L_cano) == 24)
