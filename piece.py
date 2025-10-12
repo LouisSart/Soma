@@ -54,7 +54,7 @@ def make_canonical(piece):
 def is_inside_cube(piece):
     for cube in piece:
         for c in cube:
-            if c < 0 or c > 27:
+            if c < 0 or c > 2:
                 return False
     return True
 
