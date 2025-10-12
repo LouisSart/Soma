@@ -10,6 +10,9 @@ T =  np.array([[0, 0, 0], [0, 1, 0], [1, 1, 0], [0, 2, 0]])
 Na = np.array([[0, 0, 0], [1, 0, 0], [1, 1, 0], [0, 0, 1]])
 Nb = np.array([[0, 0, 0], [1, 0, 0], [0, 1, 0], [1, 0, 1]])
 
+pieces = {name : arr for name, arr in \
+          zip(("W", "S", "L", "l", "T", "Na", "Nb"), (W, S, L, l, T, Na, Nb))}
+
 def is_canonical(piece):
     # A piece is canonically positioned if every
     # cubelet is in the (x>=0, y>=0, z>=0) portion of the 3D space
