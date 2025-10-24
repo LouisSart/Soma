@@ -47,8 +47,21 @@ def S2(x):
   | ((x & 0x00024800) >> 2)
 
 
+def gen_all_rotations(x):
+    ret = set()
+    a = x
+    for _ in range(3):
+        a = UBR3(a)
+        for _ in range(2):
+            a = S2(a)
+            for _ in range(4):
+                a = y(a)
+                ret.add(a)
+    return ret
+
 if __name__ == "__main__":
-    a = 1010548
+    a = 1401880478
+    assert(len(bin(a)) - 2 < 32)
 
     b = a
     for _ in range(3):
@@ -62,3 +75,6 @@ if __name__ == "__main__":
     for _ in range(2):
         b = S2(b)
     assert(b == a)
+
+    s = gen_all_rotations(a)
+    assert(len(s) == 24)
