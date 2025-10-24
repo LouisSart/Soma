@@ -1,7 +1,7 @@
 # Rotate grid state on the bit level
 
 
-def rol(n, d):  
+def rol(n, d):
     return ((n << d) % (1 << 32)) | (n >> (32 - d))
 
 
@@ -18,13 +18,24 @@ def S3(x):
   | ((x & 0x00400200) >> 6) \
   | ((x & 0x00000040) >> 4) \
   | ((x & 0x00010008) >> 2)
-    
+
+def y(x):
+    return (x & 0xf8402010) \
+  | ((x & 0x01088442) << 2) \
+  | ((x & 0x00201008) << 4) \
+  | ((x & 0x00040201) << 6) \
+  | ((x & 0x04020100) >> 6) \
+  | ((x & 0x00804020) >> 4) \
+  | ((x & 0x02110884) >> 2)
 
 if __name__ == "__main__":
     a = 1010548
-    print(bin(a))
+
     b = a
-    b = S3(b)
-    b = S3(b)
-    b = S3(b)
-    print(bin(b))
+    for _ in range(3):
+        b = S3(b)
+    assert(b == a)
+
+    for _ in range(4):
+        b = y(b)
+    assert(b == a)
