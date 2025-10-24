@@ -5,7 +5,7 @@ def rol(n, d):
     return ((n << d) % (1 << 32)) | (n >> (32 - d))
 
 
-def S3(x):
+def UFR3(x):
   return ((x & 0xfebaa0a1)) \
   | ((x & 0x00000400) << 2) \
   | ((x & 0x00000100) << 3) \
@@ -33,7 +33,7 @@ if __name__ == "__main__":
 
     b = a
     for _ in range(3):
-        b = S3(b)
+        b = UFR3(b)
     assert(b == a)
 
     for _ in range(4):
