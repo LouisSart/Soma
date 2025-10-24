@@ -13,18 +13,19 @@ def was_seen_before(grid, p_ind, previous_calls):
     return False
 
 
-def assemble(grid, p_ind, pieces, previous_calls):
-    p = pieces[p_ind]
-    ret = 0
-    if not was_seen_before(grid, p_ind, previous_calls):
+if __name__ == "__main__":
+    pieces = ["W", "Nb", "Na", "T", "S", "L", "l"]
+
+    def assemble(grid, p_ind):
+        p = pieces[p_ind]
+        ret = 0
         for pos in all_positions[p]:
             if fits(grid, pos):
                 if p_ind == len(pieces) - 1:
-                    previous_calls[(grid, p_ind)] = 1
                     return 1
                 else:
-                    ret += assemble(grid + pos, p_ind + 1, pieces, previous_calls)
-        previous_calls[(grid, p_ind)] = ret
-    return ret
+                    ret += assemble(grid + pos, p_ind + 1)
+        return ret
 
-print("Soma cube solutions found :", assemble(0, 0, ["W", "Nb", "Na", "T", "S", "L", "l"], dict()))
+    result = assemble(0, 0)
+    print(result, "Soma cube solutions found", f"or {result // 48} up to symmetries")
