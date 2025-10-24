@@ -1,14 +1,22 @@
 from soma import *
+from rotation import *
 
 def fits(grid, pos):
     if (grid & pos) == 0:
         return True
     return False
 
+def was_seen_before(grid, p_ind, previous_calls):
+    for g in gen_all_rotations(grid):
+        if (g, p_ind) in previous_calls:
+            return True
+    return False
+
+
 def assemble(grid, p_ind, pieces, previous_calls):
     p = pieces[p_ind]
     ret = 0
-    if (grid, p_ind) not in previous_calls:
+    if not was_seen_before(grid, p_ind, previous_calls):
         for pos in all_positions[p]:
             if fits(grid, pos):
                 if p_ind == len(pieces) - 1:

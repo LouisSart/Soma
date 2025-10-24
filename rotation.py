@@ -56,7 +56,7 @@ def gen_all_rotations(x):
             a = S2(a)
             for _ in range(4):
                 a = y(a)
-                ret.add(a)
+                yield a
     return ret
 
 if __name__ == "__main__":
@@ -76,5 +76,5 @@ if __name__ == "__main__":
         b = S2(b)
     assert(b == a)
 
-    s = gen_all_rotations(a)
+    s = set(gen_all_rotations(a))
     assert(len(s) == 24)
