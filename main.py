@@ -15,8 +15,11 @@ def was_seen_before(grid, p_ind, previous_calls):
 
 if __name__ == "__main__":
     pieces = ["W", "Nb", "Na", "T", "S", "L", "l"]
+    calls = 0
 
     def assemble(grid, p_ind):
+        global calls
+        calls += 1
         p = pieces[p_ind]
         ret = 0
         for pos in all_positions[p]:
@@ -29,3 +32,4 @@ if __name__ == "__main__":
 
     result = assemble(0, 0)
     print(result, "Soma cube solutions found", f"or {result // 48} up to symmetries")
+    print(f"{calls} recursive calls made")
