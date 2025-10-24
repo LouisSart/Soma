@@ -2,10 +2,14 @@
 
 
 def rol(n, d):
+    # Circular shift to the left by d places
     return ((n << d) % (1 << 32)) | (n >> (32 - d))
 
 
-def UFR3(x):
+def UBR3(x):
+  # Rotation of a 120° angle around an axis
+  # that passes through cubelets 0 and 26
+
   return ((x & 0xfebaa0a1)) \
   | ((x & 0x00000400) << 2) \
   | ((x & 0x00000100) << 3) \
@@ -20,6 +24,8 @@ def UFR3(x):
   | ((x & 0x00010008) >> 2)
 
 def y(x):
+    # 90° rotation around a vertical
+    # axis that passes through the center of the cube
     return (x & 0xf8402010) \
   | ((x & 0x01088442) << 2) \
   | ((x & 0x00201008) << 4) \
@@ -28,14 +34,31 @@ def y(x):
   | ((x & 0x00804020) >> 4) \
   | ((x & 0x02110884) >> 2)
 
+def S2(x):
+    # 180° rotation around an axis that passes through
+    # cubelets 10, 13 and 16
+    return (x & 0xf8012400) \
+  | ((x & 0x00009200) << 2) \
+  | ((x & 0x04900000) >> 20) \
+  | ((x & 0x02480000) >> 18) \
+  | rol(x & 0x01240124, 16) \
+  | ((x & 0x00000092) << 18) \
+  | ((x & 0x00000049) << 20) \
+  | ((x & 0x00024800) >> 2)
+
+
 if __name__ == "__main__":
     a = 1010548
 
     b = a
     for _ in range(3):
-        b = UFR3(b)
+        b = UBR3(b)
     assert(b == a)
 
     for _ in range(4):
         b = y(b)
+    assert(b == a)
+
+    for _ in range(2):
+        b = S2(b)
     assert(b == a)

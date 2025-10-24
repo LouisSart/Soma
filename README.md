@@ -2,23 +2,19 @@ A program for counting the possible combinations that solve the Soma cube
 
 ![soma_indexing](soma_index.png "Indexing used in the program")
 
-S3 permutation:  
+UBR3 permutation: Rotation of a 120° angle around an axis that passes through cubelets 0 and 26
 ```
-x = (x & 0xfebaa0a1)
-  | ((x & 0x00000400) << 2)
-  | ((x & 0x00000100) << 3)
-  | ((x & 0x00000010) << 6)
-  | ((x & 0x00004002) << 8)
-  | ((x & 0x00000800) << 13)
-  | rol(x & 0x01000004, 16)
-  | ((x & 0x00040000) >> 12)
-  | ((x & 0x00001000) >> 8)
-  | ((x & 0x00400200) >> 6)
-  | ((x & 0x00000040) >> 4)
-  | ((x & 0x00010008) >> 2);
+2 > 18 > 6
+24 > 8 > 11
+1 > 9 > 3
+22 > 16 > 14
+21 > 7 > 11
+19 > 15 > 5
+10 > 12 > 4
+23 > 25 > 17
 ```
 
-y rotation :
+y rotation : 90° rotation around a vertical axis that passes through the center of the cube
 ```
 0 > 6 > 8 > 2
 1 > 3 > 7 > 5
@@ -26,15 +22,24 @@ y rotation :
 10 > 12 > 16 > 14
 18 > 24 > 26 > 20
 19 > 21 > 25 > 23
------------------
-x = (x & 0xf8402010)
-  | ((x & 0x01088442) << 2)
-  | ((x & 0x00201008) << 4)
-  | ((x & 0x00040201) << 6)
-  | ((x & 0x04020100) >> 6)
-  | ((x & 0x00804020) >> 4)
-  | ((x & 0x02110884) >> 2);
 ```
+
+S2 rotation: 180° rotation around an axis that passes through cubelets 10, 13 and 16
+```
+3 <> 23
+7 <> 25
+5 <> 21
+1 <> 19
+22 <> 4
+0 <> 20
+2 <> 18
+6 <> 26
+8 <> 24
+12 <> 14
+9 <> 11
+15 <> 17
+```
+
 
 Link to [code generator for a bitwise permutation](https://programming.sirrida.de/calcperm.php)  
 Link to [bitwise rotation in Python](https://www.falatic.com/index.php/108/python-and-bitwise-rotation)
