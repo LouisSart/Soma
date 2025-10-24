@@ -7,7 +7,6 @@ def fits(grid, pos):
 
 def assemble(grid, pieces_left):
     p = pieces_left[-1]
-    print(p, grid, pieces_left)
     for pos in all_positions[p]:
         if fits(grid, pos):
             if len(pieces_left) == 1:
@@ -17,4 +16,4 @@ def assemble(grid, pieces_left):
                     return True
     return False
 
-print(assemble(0, ["l", "L", "S", "T", "Na", "Nb", "W"]))
+print("Soma cube solution found :", assemble(0, ["l", "L", "S", "T", "Na", "Nb", "W"]))
