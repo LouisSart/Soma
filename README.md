@@ -1,5 +1,7 @@
 A program for counting the possible combinations that solve the Soma cube
 
+run with `python3 main.py`
+
 ![soma_indexing](soma_index.png "Indexing used in the program")
 
 UBR3 permutation: Rotation of a 120° angle around an axis that passes through cubelets 0 and 26
